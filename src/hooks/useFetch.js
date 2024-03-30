@@ -15,21 +15,21 @@ export default function useFetch (path, method, body='') {
 
     fetch(`${API}${path}`, {
       method,
-      ...(body ? { body } : {}),
+      ...(body ? { body } : {}), // means if body is true then add body to object else do nothing
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     })
-    .then((res) => res.json())
-    .then(({ body }) => body ? JSON.parse(body) : null)
-    .then((data) => {
-      if (!signal.aborted) {
-        setResponse(data)
-        setLoading(false)
-      }
-    })
-    .catch((error) => console.warn('Uh-oh.', error))
+      .then((res) => res.json())
+      .then(({ body }) => (body ? JSON.parse(body) : null))
+      .then((data) => {
+        if (!signal.aborted) {
+          setResponse(data);
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.warn("Uh-oh.", error));
 
     return () => abortController.abort()
   }, [path, method, body])

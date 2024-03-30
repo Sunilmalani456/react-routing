@@ -1,5 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+
 import { Link, useParams } from "react-router-dom";
 import useTeamNames from "../hooks/useTeamNames";
 import useTeamsArticles from "../hooks/useTeamsArticles";
@@ -28,7 +30,7 @@ function Deatils({ head, body }) {
   );
 }
 
-const slugify = (title) => {
+export const slugify = (title) => {
   // ex : "Hello World?" => "hello-world?"
   return title.toLowerCase().split(" ").join("-");
 };
