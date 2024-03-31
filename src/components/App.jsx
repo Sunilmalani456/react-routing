@@ -5,6 +5,7 @@ import Players from "./players";
 import Navbar from "./navbar";
 import TeamPage from "./teampage";
 import Player from "./player";
+import Team from "./team";
 
 const App = () => {
   return (
@@ -15,8 +16,18 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/players" element={<Players />}>
             <Route path=":playerId" element={<Player />} />
+            <Route
+              path=""
+              element={
+                <h className="flex h-full text-2xl font-bold justify-center items-center">
+                  Select Player
+                </h>
+              }
+            />
           </Route>
-          <Route path="/teams" element={<Teams />} />
+          <Route path="/teams" element={<Teams />}>
+            <Route path=":teamId" element={<Team />} />
+          </Route>
           <Route path="/:teamId" element={<TeamPage />} />
         </Routes>
       </div>
