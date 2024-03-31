@@ -82,7 +82,7 @@ const TeamPage = () => {
         {articles.map((article) => (
           <div key={article.id}>
             <Link
-              to={`/articles/${slugify(article.title)}`}
+              to={`/${teamId}/articles/${slugify(article.title)}`}
               className="text-2xl"
             >
               <p>{article.title}</p>

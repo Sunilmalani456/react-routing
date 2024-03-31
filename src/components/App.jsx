@@ -6,6 +6,8 @@ import Navbar from "./navbar";
 import TeamPage from "./teampage";
 import Player from "./player";
 import Team from "./team";
+import Article from "./article";
+import Articles from "./articles";
 
 const App = () => {
   return (
@@ -29,6 +31,9 @@ const App = () => {
             <Route path=":teamId" element={<Team />} />
           </Route>
           <Route path="/:teamId" element={<TeamPage />} />
+          <Route path="/:teamId/articles" element={<Articles />}>
+            <Route path=":articleId" element={<Article />} />
+          </Route>
         </Routes>
       </div>
     </Router>

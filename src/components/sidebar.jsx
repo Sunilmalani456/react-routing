@@ -6,8 +6,9 @@ const CustomLink = ({ to, children }) => {
   const location = useLocation();
 
   // ex: /players/stephen-curry => stephen-curry 👇
-  const playerId = location.pathname.split("/")[2];
-  const match = playerId === to;
+  // const playerId = location.pathname.split("/")[2]; // previous
+  const split = location.pathname.split("/"); // new for articles page
+  const match = split[split.length - 1] === to;
   const style = match ? { color: "var(--white)", fontWeight: 900 } : {};
 
   return (
