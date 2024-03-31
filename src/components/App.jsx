@@ -4,6 +4,7 @@ import Teams from "./teams";
 import Players from "./players";
 import Navbar from "./navbar";
 import TeamPage from "./teampage";
+import Player from "./player";
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/players" element={<Players />} />
+          <Route path="/players" element={<Players />}>
+            <Route path=":playerId" element={<Player />} />
+          </Route>
           <Route path="/teams" element={<Teams />} />
           <Route path="/:teamId" element={<TeamPage />} />
         </Routes>

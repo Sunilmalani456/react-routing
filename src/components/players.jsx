@@ -1,6 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useSearchParams,
+  Outlet,
+  useParams,
+} from "react-router-dom";
 import usePlayerNames from "../hooks/usePlayerNames";
 import { slugify } from "./teampage";
 import { useEffect, useState } from "react";
@@ -15,7 +21,7 @@ const CustomLink = ({ to, children }) => {
 
   return (
     <Link
-      className="flex font-bold flex-col px-1"
+      className="flex font-bold flex-col px-1 truncate"
       style={{ ...style }}
       to={{
         pathname: to,
@@ -41,6 +47,7 @@ const Sidebar = ({ name }) => {
 };
 
 const Players = () => {
+  const { playerId } = useParams();
   const location = useLocation(); // mean current location
   const query = location.search; // mean current search query
   const [searchParams] = useSearchParams(query); // mean current search params
@@ -62,9 +69,12 @@ const Players = () => {
 
   return (
     <div className="flex w-full justify-center pt-7">
-      <div className="w-full max-w-xl flex">
+      <div className="w-full max-w-2xl flex">
         <Sidebar name={name} />
-        <div>jasgaj</div>
+        <div className="w-full flex flex-col items-center px-4">
+          {/* Nested Route */}
+          <Outlet />
+        </div>
       </div>
     </div>
   );
