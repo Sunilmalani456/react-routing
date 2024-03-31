@@ -21,14 +21,22 @@ const App = () => {
             <Route
               path=""
               element={
-                <h className="flex h-full text-2xl font-bold justify-center items-center">
-                  Select Player
+                <h className="flex h-full text-xl font-bold justify-center items-center">
+                  Select a Player
                 </h>
               }
             />
           </Route>
           <Route path="/teams" element={<Teams />}>
             <Route path=":teamId" element={<Team />} />
+            <Route
+              path=""
+              element={
+                <h className="w-full flex text-xl font-bold justify-center items-center">
+                  Select a Team
+                </h>
+              }
+            />
           </Route>
           <Route path="/:teamId" element={<TeamPage />} />
           <Route path="/:teamId/articles" element={<Articles />}>

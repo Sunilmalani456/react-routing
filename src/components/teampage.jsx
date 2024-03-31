@@ -7,6 +7,7 @@ import useTeamNames from "../hooks/useTeamNames";
 import useTeamsArticles from "../hooks/useTeamsArticles";
 import useTeam from "../hooks/useTeam";
 import TeamLogo from "./TeamLogo";
+import Loading from "./loading";
 
 function useTeamPageData(teamId) {
   const { response: teamNames, loading: LoadingTeamNames } = useTeamNames();
@@ -37,12 +38,17 @@ export const slugify = (title) => {
 
 const TeamPage = () => {
   const { teamId } = useParams();
-  const { teamNames, articles, team, Loading } = useTeamPageData(teamId);
+  const {
+    teamNames,
+    articles,
+    team,
+    Loading: loading,
+  } = useTeamPageData(teamId);
 
   // console.log({ teamNames, articles, team, Loading });
 
-  if (Loading === true) {
-    return <p>Loading...</p>;
+  if (loading === true) {
+    return <Loading />;
   }
 
   if (!teamNames.includes(teamId)) {

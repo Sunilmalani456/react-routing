@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation, useSearchParams } from "react-router-dom";
 import usePlayerNames from "../hooks/usePlayerNames";
 import Sidebar from "./sidebar";
+import Loading from "./loading";
 
 const Players = () => {
   const location = useLocation(); // mean current location
@@ -23,7 +24,7 @@ const Players = () => {
 
   const { loading, response: name } = usePlayerNames(team);
 
-  if (loading === true) return <div>Loading...</div>;
+  if (loading === true) return <Loading />;
 
   return (
     <div className="flex w-full justify-center pt-7">

@@ -2,6 +2,7 @@
 import React from "react";
 import usePlayer from "../hooks/usePlayer";
 import { Link, useParams } from "react-router-dom";
+import Loading from "./loading";
 
 const Player = () => {
   const { playerId } = useParams();
@@ -9,7 +10,7 @@ const Player = () => {
   const { loading, response: player } = usePlayer(playerId);
   console.log({ player });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
 
   if (!player) return null;
 

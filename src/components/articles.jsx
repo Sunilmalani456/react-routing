@@ -2,12 +2,13 @@
 import { useParams, Outlet } from "react-router-dom";
 import useTeamsArticles from "../hooks/useTeamsArticles";
 import Sidebar from "./sidebar";
+import Loading from "./loading";
 
 const Articles = () => {
   const { teamId } = useParams();
   const { loading, response: articles } = useTeamsArticles(teamId);
 
-  if (loading === true) return <div>Loading...</div>;
+  if (loading === true) return <Loading />;
 
   return (
     <div className="container two-column">

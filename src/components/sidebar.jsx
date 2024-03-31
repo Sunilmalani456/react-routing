@@ -28,7 +28,6 @@ const CustomLink = ({ to, children }) => {
 const Sidebar = ({ name }) => {
   return (
     <div className="sidebar">
-      <h3 className="pb-3 text-3xl font-bold px-1">Players</h3>
       {name.map((player, i) => (
         <CustomLink key={i} to={slugify(player)}>
           {player.toUpperCase()}
