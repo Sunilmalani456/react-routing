@@ -1,5 +1,10 @@
 import * as React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  // Routes,
+  // Route,
+  useRoutes,
+} from "react-router-dom";
 import Navbar from "./navbar";
 import Loading from "./loading";
 const Home = React.lazy(() => import("./home"));
@@ -11,13 +16,64 @@ const Team = React.lazy(() => import("./team"));
 const Article = React.lazy(() => import("./article"));
 const Articles = React.lazy(() => import("./articles"));
 
+const Routes = () => {
+  return useRoutes([
+    // ROUTE FOR HOME
+    { path: "/", element: <Home /> },
+
+    //  ROUTES FOR PLAYERS
+    {
+      path: "/players",
+      element: <Players />,
+      children: [
+        { path: ":playerId", element: <Player /> },
+        {
+          path: "",
+          element: (
+            <h className="flex h-full text-xl font-bold justify-center items-center">
+              Select a Player
+            </h>
+          ),
+        },
+      ],
+    },
+
+    //  ROUTES FOR TEAMS
+    {
+      path: "/teams",
+      element: <Teams />,
+      children: [
+        { path: ":teamId", element: <Team /> },
+        {
+          path: "",
+          element: (
+            <h className="w-full flex text-xl font-bold justify-center items-center">
+              Select a Team
+            </h>
+          ),
+        },
+      ],
+    },
+
+    // ROUTES FOR TEAM PAGE
+    { path: "/:teamId", element: <TeamPage /> },
+
+    // ROUTES FOR ARTICLES
+    {
+      path: "/:teamId/articles",
+      element: <Articles />,
+      children: [{ path: ":articleId", element: <Article /> }],
+    },
+  ]);
+};
+
 const App = () => {
   return (
     <Router>
       <div>
         <Navbar />
         <React.Suspense fallback={<Loading />}>
-          <Routes>
+          {/* <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/players" element={<Players />}>
               <Route path=":playerId" element={<Player />} />
@@ -45,7 +101,8 @@ const App = () => {
             <Route path="/:teamId/articles" element={<Articles />}>
               <Route path=":articleId" element={<Article />} />
             </Route>
-          </Routes>
+          </Routes> */}
+          <Routes />
         </React.Suspense>
       </div>
     </Router>
