@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Navigate } from "react-router-dom";
 import useTeam from "../hooks/useTeam";
 import TeamLogo from "./TeamLogo";
 import Loading from "./loading";
@@ -8,12 +8,14 @@ const Team = () => {
   const { teamId } = useParams();
   const { loading, response: team } = useTeam(teamId);
 
-  if (loading === true) return <Loading />;
+  let body;
 
-  if (!team) return null;
-
-  return (
-    <div className="panel">
+  if (loading === true) {
+    body = <Loading />;
+  } else if (team === null) {
+    body = <Navigate to="/teams" />;
+  } else {
+    body = (
       <div style={{ width: "100%" }}>
         <TeamLogo id={team.id} className="center" />
         <h className="medium-header center">{team.name}</h>
@@ -33,8 +35,10 @@ const Team = () => {
           {team.name} Team Page
         </Link>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <div className="panel">{body}</div>;
 };
 
 export default Team;
